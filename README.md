@@ -49,6 +49,6 @@ Client ID: 140669013631376 | eth_gasPrice: {'jsonrpc': '2.0', 'id': 1, 'result':
 Client ID: 140669013631376 | eth_maxPriorityFeePerGas: {'jsonrpc': '2.0', 'id': 1, 'result': '0x0'}
 Client ID: 140669013631376 | eth_getUncleCountByBlockNumber: {'jsonrpc': '2.0', 'id': 1, 'result': '0x0'}
 ```
-- Observe the client ID used should be the same for each instantiation of the class. This is due to running async calls to the API, resulting in non-blocking execution.
+- The consistent client ID across script invocations indicates the use of connection pooling, efficiently managing TCP/IP connections. Additionally, non-blocking async API calls contribute to faster responses.
 
-- Re-running the script should not prompt you again for your API Key and Node name. These are now secured on your local Keyring manager.
+- Re-running the script should not prompt you again for your API Key and Node name. These are now secured in your local Keyring manager.

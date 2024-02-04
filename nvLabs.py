@@ -62,7 +62,7 @@ class NirvanaLabs:
             ]
         results = await asyncio.gather(*coroutines)
         for param_method, response in results:
-            print(f'Client ID: {id(self.client)} | {param_method} | {response}')
+            print(f'Client ID: {id(self.client)}: {param_method} | {response}')
         return results
     
 if __name__ == '__main__':

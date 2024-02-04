@@ -1,7 +1,7 @@
 # Nirvana Labs Avalanche C-Chain Demo
 
 This repository leverages the Nirvana Cloud node services to produce a collection of API calls to a provisioned Avalanche node.
-
+This repository should work on Linux kernels. It has not been tested on Windows.
 
 ## Pre-Reqs
 

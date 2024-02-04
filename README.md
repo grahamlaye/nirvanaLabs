@@ -5,7 +5,6 @@ This repository leverages the Nirvana Cloud node services to produce a collectio
 
 ## Pre-Reqs
 
-- You have read and understood the Qredo API Security Best Practices document [here](https://developers.qredo.com/developer-guides/qredo-api/security-best-practices).
 - You have a Nirvana Labs account. Open [here](https://nirvanalabs.io/).
 - You have entered a payment method [here](https://nirvanalabs.io/cloud).
 - You have successfully provisioned an Avalanche Mainnet node [here](https://nirvanalabs.io/dashboard/nodes).

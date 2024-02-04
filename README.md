@@ -42,3 +42,14 @@ pip3 install -r requirements.txt
 python3 nvLabs.py
 ```
 
+- You should see an output similar to the following:
+```bash
+Client ID: 140669013631376 | net_version: {'jsonrpc': '2.0', 'id': 1, 'result': '43114'}
+Client ID: 140669013631376 | eth_blockNumber: {'jsonrpc': '2.0', 'id': 1, 'result': '0x2755403'}
+Client ID: 140669013631376 | eth_gasPrice: {'jsonrpc': '2.0', 'id': 1, 'result': '0x5d21dba00'}
+Client ID: 140669013631376 | eth_maxPriorityFeePerGas: {'jsonrpc': '2.0', 'id': 1, 'result': '0x0'}
+Client ID: 140669013631376 | eth_getUncleCountByBlockNumber: {'jsonrpc': '2.0', 'id': 1, 'result': '0x0'}
+```
+- Observe the client ID used should be the same for each instantiation of the class. This is due to running async calls to the API, resulting in non-blocking execution.
+
+- Re-running the script should not prompt you again for your API Key and Node name. These are now secured on your local Keyring manager.

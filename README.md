@@ -15,7 +15,7 @@ This repository leverages the Nirvana Cloud node services to produce a collectio
 
 - Clone the Repo
 ```bash
-git clone <<link to GitHub repo>>
+git clone https://github.com/grahamlaye/nirvanaLabs.git
 ```
 - Change directory to repo
 ```bash

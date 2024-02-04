@@ -28,7 +28,7 @@ class NirvanaLabs:
             timeout=10
             )
             response.raise_for_status()
-            return response.json()
+            return paramMethod, response.json()
         except httpx.HTTPError as e:
             print(f'There was an HTTP error in the API response: {e}')
             return None
@@ -60,9 +60,10 @@ class NirvanaLabs:
             self.maxPriorityPerGas(),
             self.getUncles()
             ]
-        print(f'Client ID: {id(self.client)}')
         results = await asyncio.gather(*coroutines)
+        for param_method, response in results:
+            print(f'Client ID: {id(self.client)} | {param_method} | {response}')
         return results
     
 if __name__ == '__main__':
-    pp(asyncio.run(NirvanaLabs().runAll()))
+    asyncio.run(NirvanaLabs().runAll())

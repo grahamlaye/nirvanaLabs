@@ -19,17 +19,17 @@ git clone https://github.com/grahamlaye/nirvanaLabs.git
 ```
 - Change directory to repo
 ```bash
-cd <<repo dir>>
+cd nirvanaLabs
 ```
 
 - OPTIONAL: Create python3 virtual environment
 ```bash
-python3 -m venv qredoApiSDK
+python3 -m venv nirvanaLabs
 ```
 
 - OPTIONAL: Activate the new venv
 ```bash
-source qredoApiSDK/bin/activate
+source nirvanaLabs/bin/activate
 ```
 
 - Install dependencies from requirements.txt
@@ -37,57 +37,8 @@ source qredoApiSDK/bin/activate
 pip3 install -r requirements.txt
 ```
 
-- Test with your apiKey, apiSecret & workspaceID ** IMPORTANT: Please do not hard code your credentials for production usage [Best Practices](https://developers.qredo.com/developer-guides/qredo-api/security-best-practices). **
+- Run the nvLabs.py script. Upon initial launch this script will secure your apiKey and nodeName in your local hosts keyring manager.
 ```bash
-vi getToken.py
-```
-```bash
-# Edit apiKey, apiSecret and workspaceID values for your environment.
-def main():
-    apiKey = 'yourApiKeyGoesHere'
-    apiSecret = 'yourApiSecretGoesHere'
-    workspaceID = 'yourWorkspaceIDGoesHere'
+python3 nvLabs.py
 ```
 
-- Run the getToken.py script. This should print a token that can be used to authenticate your API calls to the Qredo Network.
-```bash
-python3 getToken.py
-```
-
--  Once successful restore the getToken.py file to its original state. Now, use the example.py file to perform two GET REST API calls to the Qredo network. The script is preconfigured to retrieve workspace attributes and list existing API keys via asynchronous requests. ** IMPORTANT: Please do not hard code your credentials for production usage [Best Practices](https://developers.qredo.com/developer-guides/qredo-api/security-best-practices). **
-```bash
-vi example.py
-```
-```bash
-
-# Change apiKey, apiSecret and workspaceID to your own environment arguments below.
-async def main():
-    apiKey = 'apiKeyGoesHere'
-    apiSecret = 'apiSecretGoesHere'
-    workspaceID = 'workspaceIDGoesHere'
-```
-
-- Run the example.py script. This will pretty print the afforementioned GET responses.
-```bash
-python3 example.py
-```
-
-- Observe that you can make simple additions to the example.py script to initiate API calls with and without a JSON body.
-
-Example 1: No JSON body
-
-```bash
-    async def newApiCallNoJson(self):
-        return await self.skeletonRequest \
-            (url=f'endpoint/example', method='GET')
-```
-
-Example 2: With a JSON body
-
-```bash
-    async def newApiCallWithJson(self):
-        return await self.skeletonRequest \
-            (url=f'endpoint/example', method='POST', body=pathToJson)
-```
-
-### You can now make API calls to the Qredo network with the correct x-token authentication headers.

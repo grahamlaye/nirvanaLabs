@@ -11,10 +11,14 @@ class NirvanaLabs:
         self.apiKey, self.nodeName = mySecrets['apiKey'], mySecrets['nodeName']
         self.url = f'https://avax.nirvanalabs.xyz/{self.nodeName}/ext/bc/C/rpc?apikey={self.apiKey}'
         self.headers = {
-            'accept': 'application/json', 'content-type': 'application/json'
+            'accept': 'application/json',
+            'content-type': 'application/json'
         }
         self.payload = {
-            'jsonrpc': '2.0', 'method': None, 'params': None, 'id': 1
+            'jsonrpc': '2.0',
+            'method': None,
+            'params': None,
+            'id': 1
         }
 
     async def requestTemplate(self, httpMethod, paramMethod, params=None, progress=None):
@@ -56,6 +60,9 @@ class NirvanaLabs:
     async def getUncles(self, progress):
         return await self.requestTemplate \
             (httpMethod='POST', paramMethod='eth_getUncleCountByBlockNumber', params=['latest'], progress=progress)
+
+    async def ethSync(self, progress):
+        return await self.requestTemplate(httpMethod='POST', paramMethod='eth_syncing', progress=progress)
     
     async def runAll(self):
         with Progress() as progress:
@@ -65,7 +72,8 @@ class NirvanaLabs:
                 #self.getLatestBlockTxNumber(progress),
                 self.gasPrice(progress),
                 self.maxPriorityPerGas(progress),
-                self.getUncles(progress)
+                self.getUncles(progress),
+                self.ethSync(progress)
             ]
             results = await asyncio.gather(*coroutines)
             for param_method, response in results:

@@ -21,10 +21,12 @@ class NirvanaLabs:
             'id': 1
         }
 
-    async def requestTemplate(self, httpMethod, paramMethod, params=None, progress=None):
+    async def requestTemplate(self, httpMethod, paramMethod=None, params=None, progress=None):
         self.payload['method'] = paramMethod
         if params:
             self.payload['params'] = params
+        else:
+            self.payload['params'] = []
         try:
             task = progress.add_task(f"[cyan]{paramMethod} in progress...", total=1)
             response = await self.client.request(
@@ -61,15 +63,27 @@ class NirvanaLabs:
         return await self.requestTemplate \
             (httpMethod='POST', paramMethod='eth_getUncleCountByBlockNumber', params=['latest'], progress=progress)
     
+    async def ethSync(self, progress):
+        return await self.requestTemplate(httpMethod='POST', paramMethod='eth_syncing', progress=progress)
+    
+    async def netListening(self, progress):
+        return await self.requestTemplate(httpMethod='POST', paramMethod='net_listening', progress=progress)
+    
+    async def netPeerCount(self, progress):
+        return await self.requestTemplate(httpMethod='POST', paramMethod='net_peerCount', progress=progress)
+    
     async def runAll(self):
         with Progress() as progress:
             coroutines = [
                 self.getNetVersion(progress),
                 self.getBlockNumber(progress),
-                #self.getLatestBlockTxNumber(progress),
+                self.getLatestBlockTxNumber(progress),
                 self.gasPrice(progress),
                 self.maxPriorityPerGas(progress),
                 self.getUncles(progress),
+                self.ethSync(progress),
+                self.netListening(progress),
+                self.netPeerCount(progress)
             ]
             results = await asyncio.gather(*coroutines)
             for param_method, response in results:

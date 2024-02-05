@@ -60,9 +60,6 @@ class NirvanaLabs:
     async def getUncles(self, progress):
         return await self.requestTemplate \
             (httpMethod='POST', paramMethod='eth_getUncleCountByBlockNumber', params=['latest'], progress=progress)
-
-    async def ethSync(self, progress):
-        return await self.requestTemplate(httpMethod='POST', paramMethod='eth_syncing', progress=progress)
     
     async def runAll(self):
         with Progress() as progress:
@@ -73,7 +70,6 @@ class NirvanaLabs:
                 self.gasPrice(progress),
                 self.maxPriorityPerGas(progress),
                 self.getUncles(progress),
-                self.ethSync(progress)
             ]
             results = await asyncio.gather(*coroutines)
             for param_method, response in results:

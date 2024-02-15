@@ -1,7 +1,7 @@
 import keyring
 
 class Provider:
-    def __init__(self, keyRingName='nvLab'):
+    def __init__(self, keyRingName='nvLab2'):
         self.keyRingName = keyRingName
         self.apiKey = keyring.get_password(self.keyRingName, 'apiKey')
         self.nodeName = keyring.get_password(self.keyRingName, 'nodeName')

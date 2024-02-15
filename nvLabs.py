@@ -9,7 +9,8 @@ class NirvanaLabs:
         self.client = httpx.AsyncClient()
         mySecrets = nvSecrets.Provider().getCredentials()
         self.apiKey, self.nodeName = mySecrets['apiKey'], mySecrets['nodeName']
-        self.url = f'https://avax.nirvanalabs.xyz/{self.nodeName}/ext/bc/C/rpc?apikey={self.apiKey}'
+        #self.url = f'https://avax.nirvanalabs.xyz/{self.nodeName}/ext/bc/C/rpc?apikey={self.apiKey}'
+        self.url = f'https://mantle-sepolia.nirvanalabs.xyz/{self.nodeName}?apikey={self.apiKey}'
         self.headers = {
             'accept': 'application/json',
             'content-type': 'application/json'
@@ -72,6 +73,12 @@ class NirvanaLabs:
     async def netPeerCount(self, progress):
         return await self.requestTemplate(httpMethod='POST', paramMethod='net_peerCount', progress=progress)
     
+    async def ethEstimateGas(self, progress):
+        params = [
+            {"from": "0x9cE564c7d09f88E7d8233Cdd3A4d7AC42aBFf3aC","to": "0xd46e8dd67c5d32be8058bb8eb970870f07244567","value": "0x9184e72a"}
+            ]
+        return await self.requestTemplate(httpMethod='POST', paramMethod='eth_estimateGas', params=params)
+    
     async def runAll(self):
         with Progress() as progress:
             coroutines = [
@@ -83,7 +90,8 @@ class NirvanaLabs:
                 self.getUncles(progress),
                 self.ethSync(progress),
                 self.netListening(progress),
-                self.netPeerCount(progress)
+                self.netPeerCount(progress),
+                #self.ethEstimateGas(progress)
             ]
             results = await asyncio.gather(*coroutines)
             for param_method, response in results:

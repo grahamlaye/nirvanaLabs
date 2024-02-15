@@ -10,7 +10,8 @@ class NirvanaLabs:
         mySecrets = nvSecrets.Provider().getCredentials()
         self.apiKey, self.nodeName = mySecrets['apiKey'], mySecrets['nodeName']
         #self.url = f'https://avax.nirvanalabs.xyz/{self.nodeName}/ext/bc/C/rpc?apikey={self.apiKey}'
-        self.url = f'https://mantle-sepolia.nirvanalabs.xyz/{self.nodeName}?apikey={self.apiKey}'
+        #self.url = f'https://mantle-sepolia.nirvanalabs.xyz/{self.nodeName}?apikey={self.apiKey}'
+        self.url = str(input('enter full URL here: '))
         self.headers = {
             'accept': 'application/json',
             'content-type': 'application/json'
